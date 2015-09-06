@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="soapBackend"
+     context="/soapbackend">
+   <resource methods="GET" url-mapping="/echoString">
+      <inSequence>
+         <log level="full"/>
+         <send>
+            <endpoint>
+               <address uri="http://172.20.10.2:10263/services/Axis2Service"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <send/>
+      </outSequence>
+   </resource>
+   <resource methods="POST" url-mapping="/getQuote">
+      <inSequence>
+         <send>
+            <endpoint>
+               <address uri="http://172.20.10.2:10263/services/SimpleStockQuoteService"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+   </resource>
+   <resource methods="GET" url-mapping="/echoInt">
+      <inSequence>
+         <send>
+            <endpoint>
+               <address uri="http://172.20.10.2:10263/services/Axis2Service"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+      <faultSequence>
+         <makefault version="soap12">
+            <code xmlns:soap12Env="http://www.w3.org/2003/05/soap-envelope"
+                  value="soap12Env:Receiver"/>
+            <reason value="Invalid value &#34;Hi&#34; for element x"/>
+            <node/>
+            <role/>
+         </makefault>
+         <property name="RESPONSE" value="true"/>
+         <header name="To" expression="get-property('ReplyTo')"/>
+         <send/>
+      </faultSequence>
+   </resource>
+   <resource methods="GET" url-mapping="/getTime">
+      <inSequence>
+         <send>
+            <endpoint>
+               <address uri="http://172.20.10.2:10263/services/Axis2Service"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+   </resource>
+</api>
