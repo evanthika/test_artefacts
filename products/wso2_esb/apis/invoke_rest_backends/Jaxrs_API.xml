@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="Jaxrs_API"
+     context="/jaxrs">
+   <resource methods="POST PUT" url-mapping="/customerservice/customers">
+      <inSequence>
+         <log level="full"/>
+         <send>
+            <endpoint>
+               <http uri-template="http://172.20.10.2:10263/jaxrs_basic/services/customers"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <send/>
+      </outSequence>
+   </resource>
+   <resource methods="DELETE OPTIONS GET"
+             uri-template="/customerservice/customers/{id}">
+      <inSequence>
+         <log level="full"/>
+         <send>
+            <endpoint>
+               <http uri-template="http://172.20.10.2:10263/jaxrs_basic/services/customers"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <send/>
+      </outSequence>
+   </resource>
+</api>
