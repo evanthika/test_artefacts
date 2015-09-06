@@ -1,0 +1,15 @@
+    <proxy name="PassthroughProxy" startOnLoad="true" trace="disable" transports="https http">
+        <description/>
+        <target>
+            <endpoint>
+                <http uri-template="http://172.20.10.2:8290/esb/api1/1.0.0"/>
+            </endpoint>
+            <inSequence>
+                <log level="full"/>
+            </inSequence>
+            <outSequence>
+                <log level="full"/>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>

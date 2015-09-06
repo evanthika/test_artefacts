@@ -1,0 +1,7 @@
+How to execute the scenario
+
+1. Deploy the proxy service given in synapse.xml in ESB
+2. Deploy the API given in admin--ESBAPI1_v1.0.0.xml in API Manager
+3. Deploy the Jaxrs Basic sample in App Server
+4. Invoke the Proxy serive using the given Jmeter script (GET, POST, PUT, DELETE methods will be invoked)
+
